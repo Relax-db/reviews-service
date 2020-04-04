@@ -41,9 +41,10 @@ npm install
 
 ## API
 ## Reviews Module API
+
 ### Create a new review
 ```sh
-POST /listings/:listingid/reviews/:reviewid
+POST /listings/:listingid/reviews/
 ```
 #### Parameters
 | Name | Type | Description |
@@ -66,9 +67,9 @@ Status: 201 Created
 ```
 
 
-### Update reviews on a listing
+### Get reviews on a listing
 ```sh
-PUT /listings/:listingid/reviews/
+GET /listings/:listingid/reviews/
 ```
 
 #### Response
@@ -88,13 +89,24 @@ Status: 200 OK
   {
       "id": 21,
       "review_text": "a person's observation about a place they have rented",
-      "rating": 0,
+      "rating": 5,
       "date_posted": "Fri Mar 26 1976",
       "user_id": 21,
       "listings_id": 32,
       "name": "Florence Mueller",
       "photo": "https://loremflickr.com/320/240/selfie/?random=20"
+  },
+  {
+      "id": 38,
+      "review_text": "yet another person's observation about this place they have rented",
+      "rating": 4.5,
+      "date_posted": "Wed Mar 1 2018",
+      "user_id": 101,
+      "listings_id": 32,
+      "name": "Alda Lim",
+      "photo": "https://loremflickr.com/320/240/selfie/?random=20"
   }
+  
 ```
 
 ### Update a review on a listing
