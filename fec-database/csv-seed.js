@@ -36,7 +36,22 @@ reviewsDataGen();
 /////////////// UPDATE BELOW WITH NEW CSV COLUMNS/////////////
 on cqlsh shell, run the following commands:
 1. CREATE TABLE tablename.reviews ( id int PRIMARY KEY, reviews_text text, avg_rating int, date_posted text, listing_id int, user_id int );
-2. COPY reviews (id, reviews_text, avg_rating, date_posted, listing_id, user_id) FROM '<path>' with header=true;
+
+1. 
+CREATE TABLE tablename.reviews (
+  review_id int,
+  review_text varchar,
+  avg_rating int,
+  date_posted date,
+  listing_id int,
+  listing_address varchar,
+  user_id int,
+  user_name varchar,
+  user_avatar varchar,
+  PRIMARY KEY(listing_id, date_posted, review_id)
+) WITH CLUSTERING ORDER BY(date_posted DESC);
+
+2. COPY reviews (review_id, review_text, avg_rating, date_posted, listing_id, listing_address, user_id, user_name, user_avatart) FROM '/Users/nicolediannep.banta/Downloads/SDC/reviews-service/reviewsDataGenerator.csv' with header=true and delimiter=',';
 
 on psql shell, run the following commands:
 1. CREATE TABLE dumreviews (
