@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack  -d --watch",
     "server": "nodemon server/index.js",
-    "seed": "node database/index.js",
+    "cassandra:seed": "node sdc-database/cassandra/reviewsDataGen.js",
     "test": "jest"
   },
   "dependencies": {
@@ -18,6 +18,7 @@
     "babel-jest": "^25.1.0",
     "babel-watch": "^7.0.0",
     "cors": "^2.8.5",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "mysql": "^2.18.1",
