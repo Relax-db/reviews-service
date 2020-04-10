@@ -10,13 +10,18 @@
   "scripts": {
     "build": "webpack  -d --watch",
     "server": "nodemon server/index.js",
-    "cassandra:seed": "node sdc-database/cassandra/reviewsDataGen.js",
+    "cassandra:seed": "node --max-old-space-size=8192 sdc-database/cassandra/writeReviewsCsv.js",
+    "postgres:reviews:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedReviews.js",
+    "postgres:users:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedUsers.js",
+    "postgres:listings:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedListings.js",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "babel-jest": "^25.1.0",
     "babel-watch": "^7.0.0",
+    "cli-progress": "^3.6.1",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",

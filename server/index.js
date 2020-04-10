@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const models = require('../database/models.js');
+const models = require('../fec-database/models.js');
 const cors = require('cors');
 
 app.use(cors());
