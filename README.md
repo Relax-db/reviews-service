@@ -69,7 +69,7 @@ Status: 201 Created
 
 ### Get reviews on a listing
 ```sh
-GET /listings/:listingid/reviews/
+GET /listings/:listingid
 ```
 
 #### Response
