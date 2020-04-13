@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS reviewsComponent;
-CREATE DATABASE reviewsComponent ;
+CREATE DATABASE reviewsComponent;
 
 USE reviewsComponent ;
 
@@ -22,10 +22,9 @@ CREATE TABLE reviews (
     date_posted VARCHAR(30) NOT NULL ,
     user_id int NOT NULL ,
     listings_id int NOT NULL ,
-    -- FOREIGN KEY  (user_id)
-    --     REFERENCES users(id) ,
-    -- FOREIGN KEY (listings_id) 
-    --     REFERENCES listings(id),
+    FOREIGN KEY  (user_id)
+        REFERENCES users(id) ,
+    FOREIGN KEY (listings_id) 
+        REFERENCES listings(id),
     PRIMARY KEY(ID) 
-
 );

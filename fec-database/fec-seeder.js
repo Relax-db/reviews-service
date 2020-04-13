@@ -26,9 +26,7 @@ return date;
 //assuming will have around 10 reviews per listing
 
 const getListingId = () => {
-
     return faker.random.number(100);
-
 }
 
 //doesnt really matter how unique each user is, could be unique but doesnt need to be
@@ -52,5 +50,4 @@ module.exports = {
     getText,
     getUserID,
     getUsername
-
 }
