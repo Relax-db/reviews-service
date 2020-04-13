@@ -6,13 +6,11 @@ var connection = mysql.createConnection({
     user : 'root', //CHANGE THIS TO YOUR USERNAME
     database : 'reviewsComponent'
 })
-const seed = require('./seeder');
+const seed = require('./fec-seeder');
 
 connection.connect()
 
-
 //make queries here
-
 
 //iterate through each one of the data generators and add each one to the db 
 

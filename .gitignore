@@ -1,1 +1,4 @@
 node_modules
+csv
+newrelic.js
+newrelic_agent.log
