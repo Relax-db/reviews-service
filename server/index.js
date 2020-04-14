@@ -11,10 +11,6 @@ const numCPUs = require('os').cpus().length;
 
 const pg = require('../sdc-database/postgres/index.js');
 
-app.use(cors());
-app.use(express.static(
-    __dirname + '/../dist'))
-
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
 
@@ -29,10 +25,29 @@ if (cluster.isMaster) {
 } else {
     const express = require('express');
     const app = express();
+
+    app.use(cors());
+    app.use(express.static(
+        __dirname + '/../dist'))
+
+    app.listen(2500);
+
     // app.all('/*', function (req, res) { res.send('process ' + process.pid + ' says hello!').end(); })
     app.get('/listings/:listing_id', function (req, res, next) {
         const id = parseInt(req.params.listing_id);
         pg.getReviewsByListing(id, (err, result) => {
+            if (err) {
+                console.log('Cannot retrieve listing reviews', err);
+                throw err;
+            } else {
+                res.status(200).json(result.rows);
+            }
+        })
+    });
+
+    app.get('/users/:user_id', function (req, res, next) {
+        const id = parseInt(req.params.user_id);
+        pg.getReviewsByUser(id, (err, result) => {
             if (err) {
 
                 console.log('Cannot retrieve listing reviews', err);
@@ -43,7 +58,6 @@ if (cluster.isMaster) {
         })
     });
 
-    app.listen(2500);
     console.log(`Worker ${process.pid} started`);
 }
 
@@ -54,6 +68,8 @@ app.delete('/reviews/', (req, res) => {
         else { res.send('Deleted a review', result); }
     })
 });
+
+
 
 // const express = require('express');
 // const app = express();
