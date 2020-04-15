@@ -2,14 +2,12 @@
 
 const express = require('express');
 const app = express();
-const models = require('../fec-database/models.js');
 const cors = require('cors');
 
 const cluster = require('cluster');
-const http = require('http');
 const numCPUs = require('os').cpus().length;
 
-const pg = require('../sdc-database/postgres/index.js');
+const pg = require('../db-postgres/index.js');
 
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
@@ -58,6 +56,10 @@ if (cluster.isMaster) {
         })
     });
 
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '/dist'));
+    })
+
     console.log(`Worker ${process.pid} started`);
 }
 
@@ -68,21 +70,3 @@ app.delete('/reviews/', (req, res) => {
         else { res.send('Deleted a review', result); }
     })
 });
-
-
-
-// const express = require('express');
-// const app = express();
-// // app.all('/*', function (req, res) { res.send('process ' + process.pid + ' says hello!').end(); })
-// app.get('/listings/:listing_id', function (req, res, next) {
-//     const id = parseInt(req.params.listing_id);
-//     pg.getReviewsByListing(id, (err, result) => {
-//         if (err) { console.log('Cannot retrieve listing reviews', err); }
-//         else {
-//             res.status(200).json(result.rows);
-//         }
-//     })
-// });
-
-
-// app.listen(2500);
