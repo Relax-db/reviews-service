@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "webpack  -d --watch",
-    "server": "nodemon server/index.js",
+    "server": "nodemon server/server.js",
     "postgres:reviews:seed": "node --max-old-space-size=8192 db-postgres/seedReviews.js",
     "postgres:users:seed": "node --max-old-space-size=8192 db-postgres/seedUsers.js",
     "postgres:listings:seed": "node --max-old-space-size=8192 db-postgres/seedListings.js",

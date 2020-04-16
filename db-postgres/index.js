@@ -45,7 +45,7 @@ const getReviewsByUser = (id, callback) => {
 }
 
 const getUserDetails = (id, callback) => {
-  let queryString = `SELECT * FROM users WHERE user_id = $1`
+  let queryString = `SELECT * FROM users WHERE id = $1`
   pool.query(queryString, [id], function (err, result) {
     if (err) {
       callback(err, null);
@@ -125,10 +125,3 @@ module.exports = {
   getOneListing,
   deleteReview
 }
-
-// const mysql = require('mysql');
-
-// var connection = mysql.createConnection({
-//     user: 'root', //Put your username and password for SQL in here
-//     database: 'reviewsComponent'
-// })

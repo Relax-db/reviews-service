@@ -7,6 +7,7 @@
   - https://github.com/Relax-db/related-homes-module
   - https://github.com/Relax-db/reservations-module
   - https://github.com/Relax-db/reviews-service
+  - https://github.com/Relax-db/header-images
 
 ## Table of Contents
 
@@ -206,5 +207,3 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - etc
 
 ## Development
-
-
