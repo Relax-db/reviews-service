@@ -34,4 +34,4 @@ ALTER TABLE reviews ADD CONSTRAINT fk_userID FOREIGN KEY (user_id) REFERENCES us
 ALTER TABLE reviews ADD CONSTRAINT fk_listingID FOREIGN KEY (listing_id) REFERENCES listings(id);
 
 CREATE INDEX listings_id_idx ON reviews (listing_id);
-CREATE INDEX users_id_idx ON reviews USING btree (users_id); 
+CREATE INDEX users_id_idx ON reviews USING btree (user_id); 

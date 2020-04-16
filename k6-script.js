@@ -6,7 +6,7 @@ export let options = {
 };
 
 
-const rand = () => Math.floor(Math.random() * 10000);
+const rand = () => Math.floor(Math.random() * 1000);
 
 export default function () {
 
@@ -15,7 +15,8 @@ export default function () {
 
   // Replace this with normal requests w/o a for-loop
   for (let i = 0; i < 10; i++) {
-    http.get(`http://localhost:2500/listings/${rand}`);
+    // http.get(`http://localhost:2500/listings/${rand()}`);
+    http.get(`http://13.57.189.94:2500/`);
   }
 
   const after = new Date().getTime();

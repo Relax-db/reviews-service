@@ -9,11 +9,10 @@
   },
   "scripts": {
     "build": "webpack  -d --watch",
-    "server": "nodemon server/index.js",
-    "cassandra:seed": "node --max-old-space-size=8192 sdc-database/cassandra/writeReviewsCsv.js",
-    "postgres:reviews:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedReviews.js",
-    "postgres:users:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedUsers.js",
-    "postgres:listings:seed": "node --max-old-space-size=8192 sdc-database/postgres/seedListings.js",
+    "server": "nodemon server/server.js",
+    "postgres:reviews:seed": "node --max-old-space-size=8192 db-postgres/seedReviews.js",
+    "postgres:users:seed": "node --max-old-space-size=8192 db-postgres/seedUsers.js",
+    "postgres:listings:seed": "node --max-old-space-size=8192 db-postgres/seedListings.js",
     "test": "jest"
   },
   "dependencies": {
@@ -26,7 +25,7 @@
     "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "mysql": "^2.18.1",
+    "moment": "^2.24.0",
     "newrelic": "^6.5.0",
     "nodemon": "^2.0.2",
     "pg": "^8.0.0",

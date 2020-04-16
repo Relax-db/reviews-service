@@ -1,14 +1,13 @@
-require('newrelic')
+// require('newrelic')
 
 const express = require('express');
 const app = express();
-const models = require('../fec-database/models.js');
 const cors = require('cors');
 
 const cluster = require('cluster');
-const http = require('http');
 const numCPUs = require('os').cpus().length;
 
+const pg = require('../db-postgres/index.js');
 
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
@@ -22,47 +21,48 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`);
     });
 } else {
-    // Workers can share any TCP connection
-    // In this case it is an HTTP server
-    http.createServer((req, res) => {
-        res.writeHead(200);
-        res.end('hello world\n');
-    }).listen(2500);
+    const express = require('express');
+    const app = express();
+    const path = require('path');
+
+
+    app.use(cors());
+    app.use(express.static(
+        __dirname + '/../dist'))
+
+    app.listen(2500);
+
+    // app.all('/*', function (req, res) { res.send('process ' + process.pid + ' says hello!').end(); })
+    app.get('/listings/:listing_id', function (req, res, next) {
+        const id = parseInt(req.params.listing_id);
+        pg.getReviewsByListing(id, (err, result) => {
+            if (err) {
+                console.log('Cannot retrieve listing reviews', err);
+                throw err;
+            } else {
+                res.status(200).json(result.rows);
+            }
+        })
+    });
+
+    app.get('/users/:user_id', function (req, res, next) {
+        const id = parseInt(req.params.user_id);
+        pg.getReviewsByUser(id, (err, result) => {
+            if (err) {
+                console.log('Cannot retrieve listing reviews', err);
+                throw err;
+            } else {
+                res.status(200).json(result.rows);
+            }
+        })
+    });
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '/dist'));
+    })
 
     console.log(`Worker ${process.pid} started`);
 }
-
-
-app.use(cors());
-app.use(express.static(
-    __dirname + '/../dist'))
-// app.listen(2500, () => {
-//     console.log('listening on port 2500');
-// });
-
-app.get('/', function (req, res) {
-    res.end();
-})
-
-app.get('/listings', function (request, response) {
-    models.getListings(function (err, result) {
-        if (err) {
-            console.log('error retrieving listings');
-        } else {
-            response.send(result);
-        }
-    })
-})
-
-app.get('/onelisting', function (request, response) {
-    models.getOneListing(function (err, result) {
-        if (err) {
-            console.log('error retrieving listing');
-        } else {
-            response.send(result);
-        }
-    })
-})
 
 app.delete('/reviews/', (req, res) => {
     const id = req.params.id;

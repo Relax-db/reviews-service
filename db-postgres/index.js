@@ -21,7 +21,9 @@ pool.once("open", () => console.log("DB is once again ok"));
 
 // get all reviews from one listing
 const getReviewsByListing = (id, callback) => {
-  let queryString = `SELECT * FROM reviews WHERE listing_id = $1`
+  let queryString = `SELECT reviews.id, reviews.review_text, reviews.avg_rating,
+  reviews.date_posted, reviews.user_id, users.id, users.user_name, users.user_avatar
+  FROM reviews INNER JOIN users ON reviews.user_id = users.id WHERE reviews.listing_id = $1`
   pool.query(queryString, [id], function (err, result) {
     if (err) {
       callback(err, null);
@@ -41,6 +43,18 @@ const getReviewsByUser = (id, callback) => {
     }
   })
 }
+
+const getUserDetails = (id, callback) => {
+  let queryString = `SELECT * FROM users WHERE id = $1`
+  pool.query(queryString, [id], function (err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  })
+}
+
 
 // INSERT INTO reviews (id, review_text, avg_rating, date_posted, user_id, listing_id) VALUES ((SELECT COUNT(*) FROM REVIEWS), 'Test insert', 4, '2020-04-10', 10, 2);
 const createReview = (review_text, avg_rating, date_posted, user_id, listing_id, callback) => {
@@ -105,15 +119,9 @@ const deleteReview = (id, callback) => {
 module.exports = {
   getReviewsByListing,
   getReviewsByUser,
+  getUserDetails,
   createReview,
   getListings,
   getOneListing,
   deleteReview
 }
-
-// const mysql = require('mysql');
-
-// var connection = mysql.createConnection({
-//     user: 'root', //Put your username and password for SQL in here
-//     database: 'reviewsComponent'
-// })
