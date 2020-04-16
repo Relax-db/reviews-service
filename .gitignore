@@ -2,3 +2,4 @@ node_modules
 csv
 newrelic.js
 newrelic_agent.log
+db-postgres/config.js

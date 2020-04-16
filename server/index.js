@@ -23,6 +23,8 @@ if (cluster.isMaster) {
 } else {
     const express = require('express');
     const app = express();
+    const path = require('path');
+
 
     app.use(cors());
     app.use(express.static(
@@ -47,7 +49,6 @@ if (cluster.isMaster) {
         const id = parseInt(req.params.user_id);
         pg.getReviewsByUser(id, (err, result) => {
             if (err) {
-
                 console.log('Cannot retrieve listing reviews', err);
                 throw err;
             } else {

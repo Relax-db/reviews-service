@@ -1,11 +1,7 @@
-// Turned off new relic
-// ulimit still on
-// clustering werking
-
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 export let options = {
-  vus: 2000,
+  vus: 600,
   duration: '30s'
 };
 
@@ -19,7 +15,8 @@ export default function () {
 
   // Replace this with normal requests w/o a for-loop
   for (let i = 0; i < 10; i++) {
-    http.get(`http://localhost:2500/listings/${rand()}`);
+    // http.get(`http://localhost:2500/listings/${rand()}`);
+    http.get(`http://13.57.189.94:2500/`);
   }
 
   const after = new Date().getTime();

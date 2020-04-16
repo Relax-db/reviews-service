@@ -7,6 +7,7 @@ import Button from './elements/button.js';
 import Modal from './elements/Modal.js';
 import Popup from './Popup.jsx'
 import Reviews_List from './elements/reviews_list.js';
+import $ from 'jquery';
 
 class App extends React.Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class App extends React.Component {
 
     getListing() {
         const rand = () => Math.floor(Math.random() * 1000);
-        axios.get(`http://localhost:2500/listings/${rand()}`)
+        axios.get(`/listings/${rand()}`)
             .then((response) => {
                 this.setState({
                     reviews: response.data,
@@ -55,7 +56,20 @@ class App extends React.Component {
                 });
             })
             .catch((error) => { console.log(error + ' retrieving listing at app.jsx') })
-
+        // $.ajax({
+        //     method: 'GET',
+        //     url: `/listings/${rand()}`,
+        //     success: response => {
+        //         this.setState({
+        //             reviews: response.data,
+        //             rating: this.getRating(response.data),
+        //             currentReviews: response.data.slice(0, 6)
+        //         })
+        //     },
+        //     error: (error) => {
+        //         console.log(error + ' retrieving listing at app.jsx')
+        //     }
+        // });
     };
 
     getRating(arr) {
