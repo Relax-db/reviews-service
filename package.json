@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^25.1.0",
     "babel-watch": "^7.0.0",
     "cli-progress": "^3.6.1",
